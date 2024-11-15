@@ -12,7 +12,6 @@ export default function App() {
 }
 
 const Pager = ({ total, perPage, currentPage, onChangePage }) => {
-
   let result = {};
   try {
     result = calcPage({ total, perPage, currentPage });
@@ -41,7 +40,6 @@ const Pager = ({ total, perPage, currentPage, onChangePage }) => {
 
 // アイテム数などを渡すと、表示範囲や最終ページを計算する関数
 const calcPage = ({ total, perPage, currentPage }) => {
-
   if (total === 0 || perPage === 0 || currentPage === 0) {
     throw new Error();
   }
@@ -54,7 +52,8 @@ const calcPage = ({ total, perPage, currentPage }) => {
   // 小数を整数にするparseIntより、切り上げのほうが計算も少なく、コードの意図もわかりやすい
   // テストがあれば、修正後も結果が変わらないことを担保できる
 
-  if (currentPage > lastPage) { // errorCasesの最後のケースを考慮して、エラー判定を追加
+  if (currentPage > lastPage) {
+    // errorCasesの最後のケースを考慮して、エラー判定を追加
     throw new Error();
   }
 
@@ -64,7 +63,6 @@ const calcPage = ({ total, perPage, currentPage }) => {
     lastPage,
   };
 };
-
 
 ///// 以下テストのためのコード /////
 
@@ -99,7 +97,7 @@ testCases.forEach((item) => {
       console.log(
         `${JSON.stringify(item[0])} ${key} should be ${item[1][key]}, but ${
           result[key]
-        }`
+        }`,
       );
     }
   });
@@ -119,7 +117,7 @@ const errorCases = [
 
   // 存在しないページを指定
   { total: 10, perPage: 10, currentPage: 100 },
-]
+];
 
 for (const input of errorCases) {
   try {
